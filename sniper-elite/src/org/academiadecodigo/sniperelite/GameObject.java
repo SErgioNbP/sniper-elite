@@ -5,5 +5,11 @@ package org.academiadecodigo.sniperelite;
  */
 abstract public class GameObject {
 
+
+    public GameObject(){
+
+    }
+
     abstract public String getMessage();
+
 }

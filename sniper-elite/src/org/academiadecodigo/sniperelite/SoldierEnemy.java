@@ -5,15 +5,26 @@ package org.academiadecodigo.sniperelite;
  */
 public class SoldierEnemy extends Enemy {
 
-
     public SoldierEnemy(int health) {
-         super(health);
+
+         super(100);
 
     }
 
-    public void hit(int damage) {
+    @Override
+    public void hit(int bulletDamage) {
 
-        damage += (int) (Math.random() * 15 + 50);
+        System.out.println("damage: " + bulletDamage);
 
+        super.takeHealth(bulletDamage);
+
+        if (this.getHealth() <= 0){
+            this.setDead();
+            this.setHealth(0);
+            System.out.println("\n You're DEAD!!");
+            return;
+        }
+
+        System.out.println("\n Soldier health: " + this.getHealth());
     }
 }

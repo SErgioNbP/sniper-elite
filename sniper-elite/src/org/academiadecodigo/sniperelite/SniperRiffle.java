@@ -9,13 +9,15 @@ public class SniperRiffle {
     private int bulletDamage;
 
 
-    public SniperRiffle(int bulletDamage){
+    public SniperRiffle(int bulletDamage) {
 
-        this.bulletDamage = bulletDamage;
+        this.bulletDamage = bulletDamage ;
+
     }
 
-    public void shoot(Enemy enemy){
+    public void shoot(Enemy enemy) {
 
+        enemy.hit(bulletDamage + (int)(Math.random() * 25));
 
     }
 }

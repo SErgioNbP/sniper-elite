@@ -7,60 +7,76 @@ public class Game {
 
 
     private GameObject[] gameObjects;
-
     private SniperRiffle sniperRiffle;
-
     private int shotsFired;
 
 
-    public Game(GameObject[] gameObjects) {
+    public Game(int enemies) {
 
         this.gameObjects = new GameObject[5];
+
+        sniperRiffle = new SniperRiffle(50);
     }
 
 
     public void Start() {
 
+        createObjects();
 
+        shoot();
     }
 
-    public GameObject[] createObjects() {
+
+    private void createObjects() {
+
+        int count;
 
         for (int i = 0; i < gameObjects.length; i++) {
 
-            if (Math.random() * 10 > 5) {
+            count = (int) (Math.random() * 11);
+
+                // 40 % SoldierEnemy
+            if (count > 5) {
                 gameObjects[i] = new SoldierEnemy(100);
 
-            } else if (Math.random() * 10 < 3) {
+                // 40 % ArmouredEnemy
+            } else if (count < 4) {
                 gameObjects[i] = new ArmouredEnemy(100);
 
+                // 20 % Tree
             } else {
                 gameObjects[i] = new Tree();
             }
+
+            System.out.println(gameObjects[i].getMessage());
         }
-
-
-
     }
 
 
-}
+    // TODO: 05/10/2017 createObjectsWithObjectsFactory()
 
 
-/*
+    private void shoot() {
 
         for (int i = 0; i < gameObjects.length; i++) {
 
-            gameObjects[i].gameObjects;
+            if (!(gameObjects[i] instanceof Tree)) {
 
-            if (Math.random() * 10 > 5) {
-                return SoldierEnemy();
+                Enemy enemy = (Enemy) gameObjects[i];
 
-            } else if (Math.random() * 10 < 3) {
-                return new ArmouredEnemy();
+                shotsFired = 0;
 
-            } else {
-                return new Tree();
+                while (!enemy.isDead()) {
+
+                    shotsFired++;
+
+                    System.out.println(" \n Shots fired: " + shotsFired);
+
+                    sniperRiffle.shoot(enemy);
+                }
             }
+
         }
- */
+    }
+
+}

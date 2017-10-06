@@ -11,42 +11,48 @@ public class Game {
     private int shotsFired;
 
 
-    public Game(int enemies) {
+    public Game() {
 
-        this.gameObjects = new GameObject[5];
+        this.gameObjects = new GameObject[10];
 
-        sniperRiffle = new SniperRiffle(50);
+        sniperRiffle = new SniperRiffle(30);
     }
 
 
     public void Start() {
 
-        createObjects();
+        createGameObjects();
 
-        shoot();
+
+
     }
 
 
-    private void createObjects() {
+    private void createGameObjects() {
 
         int count;
 
         for (int i = 0; i < gameObjects.length; i++) {
 
-            count = (int) (Math.random() * 11);
+            count = (int) (Math.random() * 41);
 
-                // 40 % SoldierEnemy
-            if (count > 5) {
+            // 25 % SoldierEnemy
+            if (count < 10) {
                 gameObjects[i] = new SoldierEnemy(100);
 
-                // 40 % ArmouredEnemy
-            } else if (count < 4) {
+                // 25 % ArmouredEnemy
+            } else if (count >= 10 && count < 20) {
                 gameObjects[i] = new ArmouredEnemy(100);
 
-                // 20 % Tree
-            } else {
+                // 15 % Tree
+            } else if (count >= 20 && count < 25) {
                 gameObjects[i] = new Tree();
+
+                // 35 % Barrels
+            } else {
+                gameObjects[i] = new Barrel();
             }
+
 
             System.out.println(gameObjects[i].getMessage());
         }
@@ -56,27 +62,19 @@ public class Game {
     // TODO: 05/10/2017 createObjectsWithObjectsFactory()
 
 
-    private void shoot() {
+    private void shoot(Destroyable destroyable) {
 
         for (int i = 0; i < gameObjects.length; i++) {
 
-            if (!(gameObjects[i] instanceof Tree)) {
+            if (gameObjects[i] == destroyable) {
 
-                Enemy enemy = (Enemy) gameObjects[i];
+                shotsFired++;
 
-                shotsFired = 0;
+                System.out.println(" \n Shots fired: " + shotsFired);
 
-                while (!enemy.isDead()) {
-
-                    shotsFired++;
-
-                    System.out.println(" \n Shots fired: " + shotsFired);
-
-                    sniperRiffle.shoot(enemy);
-                }
+                sniperRiffle.shoot(destroyable);
             }
-
         }
-    }
 
+    }
 }

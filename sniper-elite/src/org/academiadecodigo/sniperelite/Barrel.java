@@ -12,18 +12,40 @@ public class Barrel extends GameObject implements Destroyable {
     private boolean destroyed;
 
 
-    @Override
-    public void hit(int damage) {
+    public Barrel() {
+
+        barrelType = BarrelType.values()[(int) Math.floor(Math.random() * BarrelType.values().length)];
 
     }
 
+
+    @Override
+    public void hit(int bulletDamage) {
+
+        System.out.println("damage: " + bulletDamage);
+
+        while (barrelType.getMaxDamage() > 0) {
+
+            currentDamage = bulletDamage;
+        }
+
+        if (barrelType.getMaxDamage() <= 0) {
+            destroyed = true;
+
+            System.out.println("You destroyed the barrel!");
+        }
+    }
+
+
     @Override
     public String getMessage() {
-        return null;
+
+        return "I'm a " + barrelType.toString() + " barrel!";
+
     }
 
     @Override
     public boolean isDestroyable() {
-        return false;
+        return true;
     }
 }

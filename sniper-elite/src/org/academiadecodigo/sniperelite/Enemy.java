@@ -7,7 +7,7 @@ abstract public class Enemy extends GameObject implements Destroyable {
 
 
     private int health;
-    private boolean isDead;
+    private boolean dead;
 
 
     public Enemy(int health) {
@@ -17,7 +17,14 @@ abstract public class Enemy extends GameObject implements Destroyable {
 
     abstract public void hit(int bulletDamage);
 
-    abstract public boolean isDestroyable ();
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public boolean isDestroyable (){
+        return true;
+    }
 
 
     public String getMessage() {
@@ -40,11 +47,7 @@ abstract public class Enemy extends GameObject implements Destroyable {
     }
 
 
-    public boolean isDead() {
-        return isDead;
-    }
-
     public void setDead() {
-        isDead = true;
+        dead = true;
     }
 }

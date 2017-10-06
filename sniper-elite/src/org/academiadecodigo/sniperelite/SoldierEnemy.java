@@ -12,6 +12,11 @@ public class SoldierEnemy extends Enemy {
     }
 
     @Override
+    public String getMessage() {
+        return "I'm a Soldier!!";
+    }
+
+    @Override
     public void hit(int bulletDamage) {
 
         System.out.println("damage: " + bulletDamage);

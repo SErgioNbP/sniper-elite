@@ -15,9 +15,9 @@ public class SniperRiffle {
 
     }
 
-    public void shoot(Enemy enemy) {
+    public void shoot(Destroyable target) {
 
-        enemy.hit(bulletDamage + (int)(Math.random() * 25));
+        target.hit(bulletDamage + (int)(Math.random() * 25));
 
     }
 }
